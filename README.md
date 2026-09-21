@@ -1,31 +1,13 @@
-# CPA Dashboard
+# Codex CPA 小时状态看板
 
-The dashboard now lives at <https://edocf.wznln.com:8443/dashboard/>. Detection and
-account management share one navigation shell. Switching panels preserves the
-management login and unfinished import form; it does not open another tab.
+GitHub Pages 地址：<https://asimfish.github.io/liyufeng-cpa-dashboard/>
 
-This GitHub Pages site is the compatibility entry and redirects to the fixed
-center URL once. It never forwards tokens, query parameters, or stored credentials.
-Bookmark the center URL for direct access.
+这是一个只读状态页，显示中心 CPA 的账号小时状态、代理池健康度、当前有效基线、注入计数和最近会话归因。页面通过单独的只读看板令牌访问中心 API；令牌只保存在浏览器当前标签页，不写入 URL、仓库或日志。
 
-The center hosts the account panel in a **same-origin** frame, with matching colors,
-responsive height, desktop/mobile layouts, and a recoverable loading state.
-Management uses a Secure/HttpOnly/SameSite=Strict session with CSRF protection.
-Only the center origin may frame it. The parent receives readiness, height, and
-login-state notifications, never passwords or API keys.
-
-After administrator login, the overview uses the same session; a separate viewer
-token is optional for read-only access. Viewing a client key remains an explicit
-action, and the key is hidden when leaving the management panel. Read-only tokens
-and model API keys cannot log in as an administrator.
-
-On the owner's Mac, from the deployment workspace:
+在 Mac 上复制本地看板令牌到剪贴板：
 
 ```bash
-python3 tools/cpa_web_access.py admin --open  # copy admin credential and open the embedded panel
-python3 tools/cpa_web_access.py viewer --open  # copy read-only token and open the overview
+pbcopy < ~/.local/share/liyufeng-codex-vpn-local/dashboard.token
 ```
 
-Account access keys are shared within an account, not across accounts. Header
-shape and injected-state evidence do not independently prove model capability.
-No OAuth credentials, management keys, or client keys are stored in this repository.
+这个令牌不是 CPA 管理密钥，也不是模型客户端 API key。状态页不会显示 OAuth token、请求体或完整响应状态头。没有会话归因时，页面会明确显示“暂无会话归因”，不会把账号级记录伪装成某个会话的结果。
