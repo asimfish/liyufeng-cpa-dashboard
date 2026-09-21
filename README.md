@@ -2,9 +2,9 @@
 
 GitHub Pages 地址：<https://asimfish.github.io/liyufeng-cpa-dashboard/>
 
-这是一个只读状态页，显示中心 CPA 的账号小时状态、代理池健康度、当前有效基线、注入计数和最近会话归因。页面通过单独的只读看板令牌访问中心 API；令牌只保存在浏览器当前标签页，不写入 URL、仓库或日志。
+看板按北京时间显示账号本小时状态、小时剩余时间、下一次探测倒计时、代理池失败次数、当前基线来源、异常三次确认进度和最近会话归因。中心主账号标记为 7973。
 
-在 Mac 上复制本地看板令牌到剪贴板：
+令牌会缓存到浏览器的 `localStorage`，页面上的“清除缓存”可删除。首次在 Mac 上复制本地只读看板令牌：
 
 ```bash
 pbcopy < ~/.local/share/liyufeng-codex-vpn-local/dashboard.token
